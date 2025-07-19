@@ -1,0 +1,134 @@
+/* ===============================
+   Loader General & Body
+=============================== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: black;
+  color: white;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 1s ease, color 1s ease;
+}
+
+body.loaded {
+  background-color: #fefefe;
+  color: #222;
+}
+
+/* ===============================
+   Loader Ocultamiento Elegante
+=============================== */
+.loader {
+  opacity: 1;
+  transition: opacity 0.8s ease;
+  pointer-events: all;
+}
+
+body.loaded .loader {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===============================
+   Centro del Loader
+=============================== */
+.center {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===============================
+   Anillo Animado
+=============================== */
+.ring {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  animation: ring 2s linear infinite;
+  z-index: 1;
+}
+
+.ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes ring {
+  0% {
+    transform: rotate(0deg);
+    box-shadow: 2px 5px 10px rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    box-shadow: 5px 2px 15px rgba(255, 255, 255, 0.35);
+  }
+  50% {
+    transform: rotate(180deg);
+    box-shadow: -2px 5px 20px rgba(255, 255, 255, 0.5);
+  }
+  75% {
+    box-shadow: -5px -2px 15px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    transform: rotate(360deg);
+    box-shadow: 2px 5px 10px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* ===============================
+   Texto de carga
+=============================== */
+#texto-carga {
+  position: relative;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ccc;
+  animation: textPulse 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes textPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+/* ===============================
+   Responsive para pantallas pequeñas
+=============================== */
+@media (max-width: 480px) {
+  .center {
+    width: 120px;
+    height: 120px;
+  }
+
+  .ring {
+    width: 120px;
+    height: 120px;
+  }
+
+  #texto-carga {
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+    max-width: 100px;
+  }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jewellery Design</title>
+  <link rel="stylesheet" href="Bienvenida.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Contenedor principal con video de fondo -->
+  <div class="contenedor-video">
+    <video autoplay muted class="backgroundvideo" id="videoFondo" playsinline>
+      <source src="1920X1080.webm" type="video/webm" />
+      Tu navegador no soporta el video.
+    </video>
+
+    <!-- Capa sobre el video con el botón y selector centrados -->
+    <div class="overlay">
+      <div class="contenido-centrado">
+        <button class="boton-glass fade-in" type="button" aria-label="Botón Bienvenido">
+          <span class="letras letras-es">Bienvenido</span>
+          <span class="letras letras-en">Welcome</span>
+        </button>
+
+        <!-- Selector de idioma -->
+        <div class="idioma-selector fade-in" role="region" aria-label="Selector de idioma">
+          <div id="idiomaTexto" aria-live="polite" aria-atomic="true">Español</div>
+          <div
+            class="flecha-svg"
+            id="flecha-toggle"
+            role="button"
+            tabindex="0"
+            aria-label="Cambiar idioma"
+            title="Cambiar idioma"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 width="30"
+                 height="30">
+              <path fill="none" stroke="white" stroke-width="2" d="M6 10L12 16L18 10"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const flechaToggle = document.getElementById('flecha-toggle');
+    const idiomaTexto = document.getElementById('idiomaTexto');
+    const botonBienvenido = document.querySelector('.boton-glass');
+    const letrasEs = botonBienvenido.querySelector('.letras-es');
+    const letrasEn = botonBienvenido.querySelector('.letras-en');
+
+    let idiomaActual = 'es';
+
+    function actualizarVistaIdioma() {
+      if (idiomaActual === 'es') {
+        idiomaTexto.textContent = 'Español';
+        letrasEs.style.opacity = '1';
+        letrasEn.style.opacity = '0';
+      } else {
+        idiomaTexto.textContent = 'English';
+        letrasEs.style.opacity = '0';
+        letrasEn.style.opacity = '1';
+      }
+    }
+
+    flechaToggle.addEventListener('click', () => {
+      idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
+      actualizarVistaIdioma();
+    });
+
+    flechaToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        flechaToggle.click();
+      }
+    });
+
+    botonBienvenido.addEventListener('click', () => {
+      if (idiomaActual === 'es') {
+        window.location.href = 'cargando.html';
+      } else {
+        window.location.href = 'loading.html';
+      }
+    });
+
+    actualizarVistaIdioma();
+
+    // Pausar video en 4.45
+    const videoFondo = document.getElementById('videoFondo');
+    let pausadoEn4 = false;
+
+    videoFondo.addEventListener('timeupdate', () => {
+      if (!pausadoEn4 && videoFondo.currentTime >= 4.45) {
+        pausadoEn4 = true;
+        videoFondo.pause();
+        setTimeout(() => {
+          videoFondo.currentTime = 4.45;
+        }, 10);
+      }
+    });
+
+    setInterval(() => {
+      pausadoEn4 = false;
+      videoFondo.currentTime = 0;
+      videoFondo.play();
+    }, 18999);
+
+    // Animación de aparición suave
+    window.addEventListener("DOMContentLoaded", () => {
+      const elementos = document.querySelectorAll(".fade-in");
+      elementos.forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.add("visible");
+        }, 300 + i * 300);
+      });
+    });
+  </script>
+</body>
+</html>

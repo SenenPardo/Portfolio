@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cargando...</title>
+  <link rel="stylesheet" href="Carga.css" />
+</head>
+<body>
+  <div class="center">
+    <div class="ring"></div>
+    <span id="texto-carga">Loading...</span>
+  </div>
+
+  <script>
+    const texto = document.getElementById('texto-carga');
+    
+    setTimeout(() => {
+    document.body.classList.add('fade-out');
+    }, 2000); 
+
+    setTimeout(() => {
+    window.location.href = 'menuenglish.html';
+    }, 1750); 
+
+  </script>
+</body>
+</html>
